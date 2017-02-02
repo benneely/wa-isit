@@ -3,7 +3,7 @@ from isi_lib import utils
 import cv2
 import numpy as np
 
-app = Flask(__name__, static_folder='html')
+application = Flask(__name__, static_folder='html')
 
 images = [
     {
@@ -25,32 +25,32 @@ images = [
 ]
 
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def root():
-    return app.send_static_file('index.html')
+    return application.send_static_file('index.html')
 
 
-@app.route('/js/<path:path>')
+@application.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('js', path)
 
 
-@app.route('/ng-app/<path:path>')
+@application.route('/ng-app/<path:path>')
 def send_ng(path):
     return send_from_directory('ng-app', path)
 
 
-@app.route('/css/<path:path>')
+@application.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('css', path)
 
 
-@app.route('/api/images/', methods=['GET'])
+@application.route('/api/images/', methods=['GET'])
 def get_image_list():
     return jsonify(images)
 
 
-@app.route('/api/images/<int:img_id>', methods=['GET'])
+@application.route('/api/images/<int:img_id>', methods=['GET'])
 def get_image(img_id):
     img_format = request.args.get('type')
 
@@ -74,7 +74,7 @@ def get_image(img_id):
     return send_file(img_path, mimetype=mime_type)
 
 
-@app.route('/api/images/<int:img_id>/id_region', methods=['GET'])
+@application.route('/api/images/<int:img_id>/id_region', methods=['GET'])
 def get_region_id(img_id):
     x = int(request.args.get('x'))
     y = int(request.args.get('y'))
@@ -119,4 +119,4 @@ def get_region_id(img_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    application.run(host='0.0.0.0', port=5000, debug=True)

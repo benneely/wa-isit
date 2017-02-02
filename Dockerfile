@@ -1,12 +1,10 @@
-FROM continuumio/anaconda
+FROM jupyter/scipy-notebook
 
-RUN conda install flask
-RUN conda install -c https://conda.binstar.org/menpo opencv
-RUN apt-get update
-RUN apt-get install -y \
-  libgtk2.0-0
+RUN pip install uwsgi flask
+
+RUN conda install -y -c https://conda.binstar.org/menpo opencv
 
 COPY . /app
 WORKDIR /app
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+
+CMD uwsgi --http :5000 --wsgi-file app.py --processes 4 --threads 2 --stats 0.0.0.0:9191

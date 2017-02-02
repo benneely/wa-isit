@@ -5,13 +5,9 @@ Web Accessible Image Sub-region Identifier Tool
 
 ## Staning up with docker
 ```
-docker build -t trainor .
+docker build -t opencv_uwsgi .
 
-docker run -d -p 5000:80 \
--v $(pwd):/trainor \
---name trainor \
---restart=always \
-trainor /trainor/standup.sh
+docker run -d -p 5000:5000 -p 9191:9191 opencv_uwsgi
 ```   
 
 ## Live Demo

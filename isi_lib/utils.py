@@ -299,8 +299,8 @@ def get_custom_target_features(hsv_img):
     feature_names.append('region_value_variance')
     values.append(np.var(hsv_img[:, :, 2]))
 
-    for color, features in color_features.iteritems():
-        for feature, value in sorted(features.iteritems()):
+    for color, features in color_features.items():
+        for feature, value in sorted(features.items()):
             feature_str = '%s (%s)' % (feature, color)
             feature_names.append(feature_str)
             values.append(value)
@@ -344,8 +344,8 @@ def get_trained_model(img_file, classifier='svc', cached=False):
             trained_model = pickle.load(open(cached_model_path, 'rb'))
             class_map = get_class_map(train_dir)
         except Exception as e:
-            print e
-            print "Failed to load cached training model, building a new one..."
+            print(e)
+            print("Failed to load cached training model, building a new one...")
             trained_model = None
             class_map = None
     else:
@@ -354,10 +354,10 @@ def get_trained_model(img_file, classifier='svc', cached=False):
 
     if trained_model is None:
         training_data, class_map = load_training_data(train_dir)
-        print "Loaded training data"
+        print("Loaded training data")
 
         trained_model = build_trained_model(training_data, classifier=classifier)
-        print "Loaded trained model"
+        print("Loaded trained model")
 
         pickle.dump(trained_model, open(cached_model_path, 'wb'))
 
@@ -410,7 +410,7 @@ def get_custom_color_features(hsv_img):
         mask_img = cv2.bitwise_and(hsv_img, hsv_img, mask=mask)
 
         ret, thresh = cv2.threshold(mask, 1, 255, cv2.THRESH_BINARY)
-        contours, hierarchy = cv2.findContours(
+        _, contours, _ = cv2.findContours(
             thresh,
             cv2.RETR_EXTERNAL,
             cv2.CHAIN_APPROX_SIMPLE
