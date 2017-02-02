@@ -13,3 +13,7 @@ docker run -d -p 5000:80 \
 --restart=always \
 trainor /trainor/standup.sh
 ```   
+
+## Live Demo
+http://rapid-235.vm.duke.edu:5000
+>>>>>>> upstream/master

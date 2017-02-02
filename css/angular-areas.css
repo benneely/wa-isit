@@ -1,12 +1,10 @@
 .border-medium {
-	border-width: 2px;
-	border-style: solid;
-	border-radius: 5px;
+	border-radius: 3px;
+	border: 2px solid lime;
 }
 
 .border-thin {
-	border-width: 1px;
-	border-style: solid;
+	border: 1px solid;
 	border-radius: 3px;
 }
 
@@ -15,8 +13,9 @@
 	background-color: floralwhite;
 	padding: 2px;
 	position: relative;
-	top: -20px;
+	top: -35px;
 	left: -40px;
+    white-space: nowrap;
 }
 
 .select-areas-overlay {

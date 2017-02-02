@@ -1,9 +1,12 @@
-FROM ubuntu:16.04
+FROM continuumio/anaconda
 
+RUN conda install flask
+RUN conda install -c https://conda.binstar.org/menpo opencv
 RUN apt-get update
+RUN apt-get install -y \
+  libgtk2.0-0
 
-RUN apt-get -y install python-pip
-RUN apt-get -y install python-dev
-
-RUN pip install flask
-RUN pip instsall numpy
+COPY . /app
+WORKDIR /app
+ENTRYPOINT ["python"]
+CMD ["app.py"]
